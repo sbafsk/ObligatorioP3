@@ -121,6 +121,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UsuarioController.cs" />
+    <Compile Include="ViewModels\ViewModelUsuario.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -162,6 +164,7 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Usuario\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -188,6 +191,10 @@
     <ProjectReference Include="..\Repositorios\Repositorios.csproj">
       <Project>{d9871a87-faa3-4a07-9488-5aedacb89cd9}</Project>
       <Name>Repositorios</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ServiciosWCF\ServiciosWCF.csproj">
+      <Project>{b41e5d13-caf1-4171-b8be-70f787e3e219}</Project>
+      <Name>ServiciosWCF</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

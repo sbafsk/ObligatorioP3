@@ -9,7 +9,7 @@ using System.Data.SqlClient;
 
 namespace Repositorios
 {
-    class RepoUsuario : IRepositorio<Usuario>
+    public class RepoUsuario : IRepositorio<Usuario>
     {
         public bool Alta(Usuario obj)
         {
@@ -90,6 +90,44 @@ namespace Repositorios
             }
 
             return user;
+        }
+
+        public static bool ValidarUsuario(string cedula, string contraseña)
+        {
+            bool retorno = false;
+
+            string strCon = "Data Source=(local)\\SQLEXPRESS; Initial Catalog=PortLogDB; Integrated Security=SSPI;";
+            SqlConnection con = new SqlConnection(strCon);
+
+            string sql = "select * from Usuario where Cedula=@user Contraseña=@pass;";
+            SqlCommand com = new SqlCommand(sql, con);
+
+            com.Parameters.AddWithValue("@user", cedula);
+            com.Parameters.AddWithValue("@pass", contraseña);
+
+            try
+            {
+                con.Open();
+
+                int filasAfectadas = com.ExecuteNonQuery();
+
+                if (filasAfectadas == 1)
+                {
+                    retorno = true;
+                }
+
+                con.Close();
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                if (con.State == ConnectionState.Open) con.Close();
+            }
+
+            return retorno;
         }
 
         public List<Usuario> ListarTodo()
