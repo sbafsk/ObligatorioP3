@@ -18,7 +18,8 @@ namespace Repositorios
             string strCon = "Data Source=(local)\\SQLEXPRESS; Initial Catalog=PortLogDB; Integrated Security=SSPI;";
             SqlConnection con = new SqlConnection(strCon);
 
-            string sql = "insert into Clientes(Cedula, Contraseña , Rol) values(@ci, @psw, @rol);";
+            string sql = "insert into Usuario(Cedula, Contraseña , Rol) values(@ci, @psw, @rol);";
+            
             SqlCommand com = new SqlCommand(sql, con);
 
             com.Parameters.AddWithValue("@ci", obj.Cedula);
@@ -32,6 +33,7 @@ namespace Repositorios
                 con.Close();
 
                 ret = afectadas == 1;
+                
             }
             catch
             {
@@ -92,14 +94,14 @@ namespace Repositorios
             return user;
         }
 
-        public static bool ValidarUsuario(string cedula, string contraseña)
+        public Usuario ValidarUsuario(string cedula, string contraseña)
         {
-            bool retorno = false;
+            Usuario user = null;
 
             string strCon = "Data Source=(local)\\SQLEXPRESS; Initial Catalog=PortLogDB; Integrated Security=SSPI;";
             SqlConnection con = new SqlConnection(strCon);
 
-            string sql = "select * from Usuario where Cedula=@user Contraseña=@pass;";
+            string sql = "select * from Usuario where Cedula=@user and Contraseña=@pass;";
             SqlCommand com = new SqlCommand(sql, con);
 
             com.Parameters.AddWithValue("@user", cedula);
@@ -109,11 +111,17 @@ namespace Repositorios
             {
                 con.Open();
 
-                int filasAfectadas = com.ExecuteNonQuery();
+                SqlDataReader reader = com.ExecuteReader();
 
-                if (filasAfectadas == 1)
+                if (reader.Read())
                 {
-                    retorno = true;
+                    user = new Usuario
+                    {
+                        Id = reader.GetInt32(0),
+                        Cedula = reader.GetString(1),
+                        Contraseña = reader.GetString(2),
+                        Rol = reader.GetString(3)
+                    };
                 }
 
                 con.Close();
@@ -127,7 +135,7 @@ namespace Repositorios
                 if (con.State == ConnectionState.Open) con.Close();
             }
 
-            return retorno;
+            return user;
         }
 
         public List<Usuario> ListarTodo()

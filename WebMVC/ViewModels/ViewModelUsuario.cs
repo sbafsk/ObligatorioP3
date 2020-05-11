@@ -15,5 +15,8 @@ namespace WebMVC.ViewModels
 
         [Required]
         public string Contraseña { get; set; }
+
+        [Required]
+        public string Rol { get; set; }
     }
 }

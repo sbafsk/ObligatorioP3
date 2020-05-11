@@ -4,7 +4,16 @@
 
 <div class="jumbotron">
     <h1>Obligatorio P3</h1>
-    <p class="lead">Inicie sesion para continuar a la aplicacion.</p>
-    <p>@Html.ActionLink("Iniciar Sesion", "Login", "Usuario") &raquo;</p>
+    @if (Session["usuario"] != null)
+    {
+        <p class="lead">Usuario logueado: @Session["usuario"].ToString()</p>
+        <p>Su rol es @Session["rolUsuario"].ToString()</p>
+    }
+    else
+    {
+        <p class="lead">Inicie sesion para continuar a la aplicacion.</p>
+        <p>@Html.ActionLink("Iniciar Sesion", "Login", "Home") &raquo;</p>
+    }
+
 </div>
 
