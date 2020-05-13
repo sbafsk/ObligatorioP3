@@ -8,6 +8,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repositorios", "Repositorios\Repositorios.csproj", "{D9871A87-FAA3-4A07-9488-5AEDACB89CD9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebMVC", "WebMVC\WebMVC.csproj", "{964F4A5E-8936-4A59-8F3F-8D6698B2E22D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B41E5D13-CAF1-4171-B8BE-70F787E3E219} = {B41E5D13-CAF1-4171-B8BE-70F787E3E219}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiciosWCF", "ServiciosWCF\ServiciosWCF.csproj", "{B41E5D13-CAF1-4171-B8BE-70F787E3E219}"
 EndProject

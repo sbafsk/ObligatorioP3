@@ -26,13 +26,13 @@
                         switch (Session["rolUsuario"].ToString())
                         {
                             case "deposito":
-                                <li>@Html.ActionLink("Listar Productos", "ListarProductos", "Productos")</li>
+                                <li>@Html.ActionLink("Listar Productos", "ListarProductos", "Producto")</li>
                                 <li>@Html.ActionLink("Registrar Importacion", "AltaImportacion", "Importacion")</li>
                                 <li>@Html.ActionLink("Cerrar sesión", "Logout", "Home")</li>
                                 break;
                             case "admin":
                                 <li>@Html.ActionLink("Registrar Usuario", "RegistroUsuario", "Admin")</li>
-                                <li>@Html.ActionLink("Listar Productos", "ListarProductos", "Productos")</li>
+                                <li>@Html.ActionLink("Listar Productos", "ListarProductos", "Producto")</li>
                                 <li>@Html.ActionLink("Prevision de Ganancia", "CalculoGanancia", "Importacion")</li>
                                 <li>@Html.ActionLink("Generar archivos de texto", "GenerarTxt", "Admin")</li>
                                 <li>@Html.ActionLink("Cerrar sesión", "Logout", "Home")</li>

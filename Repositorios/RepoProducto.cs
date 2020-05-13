@@ -9,7 +9,7 @@ using System.Data.SqlClient;
 
 namespace Repositorios
 {
-    class RepoProducto : IRepositorio<Producto>
+    public class RepoProducto : IRepositorio<Producto>
     {
         public bool Alta(Producto obj)
         {
@@ -23,7 +23,49 @@ namespace Repositorios
 
         public Producto BuscarPorId(int id)
         {
-            throw new NotImplementedException();
+            Producto prod = null;
+
+            string strCon = "Data Source=(local)\\SQLEXPRESS; Initial Catalog=PortLogDB; Integrated Security=SSPI;";
+            SqlConnection con = new SqlConnection(strCon);
+
+            string sql = "select * from Producto where Id=@id;";
+            SqlCommand com = new SqlCommand(sql, con);
+
+            com.Parameters.AddWithValue("@id", id);
+
+            try
+            {
+                con.Open();
+                SqlDataReader reader = com.ExecuteReader();
+
+                RepoCliente repo_cli = new RepoCliente();
+
+                if (reader.Read())
+                {
+                    Cliente cli = repo_cli.BuscarPorId(reader.GetInt32(4));
+                    prod = new Producto
+                    {
+                        Id = reader.GetInt32(0),
+                        Codigo = reader.GetString(1),
+                        Nombre= reader.GetString(2),
+                        PesoPorUnidad = reader.GetInt32(3),
+                        Cliente = cli
+
+                    };
+                }
+
+                con.Close();
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                if (con.State == ConnectionState.Open) con.Close();
+            }
+
+            return prod;
         }
 
         public List<Producto> ListarTodo()
@@ -41,20 +83,19 @@ namespace Repositorios
                 con.Open();
                 SqlDataReader reader = com.ExecuteReader();
 
-                RepoCliente repoCli = new RepoCliente();
+                RepoCliente repo_cli = new RepoCliente();
 
                 while (reader.Read())
                 {
-                    Cliente cli = repoCli.BuscarPorId(reader.GetInt32(4));                    
-
+                     
                     Producto prod = new Producto
                     {
                         Id = reader.GetInt32(0),
                         Codigo = reader.GetString(1),
                         Nombre = reader.GetString(2),
                         PesoPorUnidad = reader.GetInt32(3),
-                        Cliente = cli
-                    };
+                        Cliente = repo_cli.BuscarPorId(reader.GetInt32(4))
+                };
 
                     productos.Add(prod);
                 }

@@ -17,6 +17,10 @@ namespace Dominio
 
         public string Cedula { get; set; }
 
+        public string RUT { get; set; }
+
+        public DateTime FechaCreacion { get; set; }
+
 
     }
 }

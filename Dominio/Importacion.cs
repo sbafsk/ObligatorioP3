@@ -10,11 +10,11 @@ namespace Dominio
     {
         public int Id { get; set; }
 
-        public string FechaIngreso { get; set; }
+        public DateTime FechaIngreso { get; set; }
 
-        public string FechaPrevSalida { get; set; }
+        public DateTime FechaPrevSalida { get; set; }
 
-        public string FechaSalida { get; set; }
+        public DateTime FechaSalida { get; set; }
 
         public Producto Producto { get; set; }
 
@@ -22,6 +22,6 @@ namespace Dominio
 
         public int PrecioUnitario { get; set; }
 
-        public Importacion() { }
+        
     }
 }

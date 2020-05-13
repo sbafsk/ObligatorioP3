@@ -4,19 +4,21 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace WebMVC.ViewModels
-
 {
-    public class ViewModelUsuario 
+    public class ViewModelProducto
     {
-        [Required]
-        public string Cedula { get; set; }
 
         [Required]
-        public string Contraseña { get; set; }
+        public int Id { get; set; }
 
         [Required]
-        public string Rol { get; set; }
+        public string Codigo { get; set; }
+
+        [Required]
+        public string Nombre { get; set; }
+
+        [Required]
+        public int Stock { get; set; }
     }
 }
